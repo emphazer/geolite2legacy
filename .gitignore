@@ -3,4 +3,5 @@
 *.dat
 *.zip
 *.pyc
+*.tmp
 __pycache__
