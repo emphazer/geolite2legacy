@@ -293,9 +293,11 @@ class CountryRadixTree(RadixTree):
 
     def gen_nets(self, locations, infile):
         for row in csv.DictReader(infile):
-            location = locations.get(row['geoname_id'])
+            location = locations.get(row['registered_country_geoname_id'])
             if location is None:
-                continue
+                location = locations.get(row['geoname_id'])
+                if location is None:
+                    continue
 
             nets = [ipaddr.IPNetwork(row['network'])]
             country_iso_code = location['country_iso_code'] or location['continent_code']
@@ -444,3 +446,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
